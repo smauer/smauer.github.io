@@ -14,6 +14,11 @@ var SLIDES = {
             "title": "Slide 3",
             "text": "Third slide!",
             "size": "lrg"
+        },
+        {
+            "title": "New Slide",
+            "text": "New Text",
+            "size": "lrg"
         }
     ]
 }
