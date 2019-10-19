@@ -40,3 +40,5 @@ const setSlide = (slideData) => {
 }
 
 document.getElementById("nextSlide").onclick = nextSlide;
+
+setSlide(SLIDES.data[0]);
