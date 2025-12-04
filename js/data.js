@@ -29,7 +29,7 @@ const nextSlide = function() {
     //}
     //console.log(SLIDES.data[slideIdx]);
     //setSlide(SLIDES.data[slideIdx]);
-    fetch('https://www.affirmations.dev')
+    fetch('https://api.allorigins.win/raw?url=https://www.affirmations.dev')
       .then(response => {
         // Check if the response was successful (e.g., status code 200-299)
         if (!response.ok) {
