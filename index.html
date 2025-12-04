@@ -5,14 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/main.css" />
-    <script type="module" src="js/data.js"></script>
-    <title>Document</title>
+    <title>Daily Affirmation</title>
 </head>
 <body>
-    <div id="app">
-        <h1 id="slideTitle"></h1>
-        <div id="slideText"></div>
+
+    <div class="container">
+        <h1>Your Daily Affirmation</h1>
+        <div id="affirmation-text">Loading...</div>
+        <button onclick="getAffirmation()">New Affirmation</button>
     </div>
-    <button id="nextSlide">Next</button>
+
+    <script>
+        // We use a CORS proxy to bypass the restriction on affirmations.dev
+        // Without this proxy, the browser would block the request.
+        const PROXY_URL = "https://api.allorigins.win/raw?url=";
+        const API_URL = "https://www.affirmations.dev";
+
+        async function getAffirmation() {
+            const displayElement = document.getElementById('affirmation-text');
+            displayElement.innerText = "Loading...";
+            
+            try {
+                // Fetch from the proxy, which fetches from the actual API
+                const response = await fetch(PROXY_URL + encodeURIComponent(API_URL));
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                
+                // Display the "affirmation" element from the JSON
+                displayElement.innerText = data.affirmation;
+            } catch (error) {
+                console.error('Error fetching affirmation:', error);
+                displayElement.innerText = "Oops! Couldn't load an affirmation.";
+                displayElement.classList.add('error');
+            }
+        }
+
+        // Load an affirmation as soon as the page loads
+        getAffirmation();
+    </script>
+
 </body>
 </html>
