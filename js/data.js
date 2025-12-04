@@ -29,7 +29,7 @@ const nextSlide = function() {
     //}
     //console.log(SLIDES.data[slideIdx]);
     //setSlide(SLIDES.data[slideIdx]);
-    fetch('https://api.allorigins.win/raw?url=https://www.affirmations.dev')
+    fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.affirmations.dev')}`)
         .then(response => {
         	if (response.ok) return response.json()
         	throw new Error('Network response was not ok.')
