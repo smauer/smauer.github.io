@@ -30,22 +30,11 @@ const nextSlide = function() {
     //console.log(SLIDES.data[slideIdx]);
     //setSlide(SLIDES.data[slideIdx]);
     fetch('https://api.allorigins.win/raw?url=https://www.affirmations.dev')
-      .then(response => {
-        // Check if the response was successful (e.g., status code 200-299)
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        // Parse the response body as JSON
-        setSlide(response.json());
-      })
-      .then(data => {
-        console.log(data); // Process the fetched data
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error); // Handle any errors
-      });
-    
-    
+        .then(response => {
+        	if (response.ok) return response.json()
+        	throw new Error('Network response was not ok.')
+        })
+        .then(data => setSlide(data.contents));
 }
 
 const setSlide = (slideData) => {
